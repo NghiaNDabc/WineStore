@@ -62,11 +62,7 @@
             @Html.DisplayFor(modelItem => item.soLuong)
         </td>
         <td>
-            @{ 
-                var imgPath = item.image;
-            }
-            @*@Html.DisplayFor(modelItem => item.image)*@
-            <img src="~/Img/WineImages/@imgPath" width="180"/>
+            @Html.DisplayFor(modelItem => item.image)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.khuVuc)
