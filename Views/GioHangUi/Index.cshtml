@@ -1,0 +1,87 @@
+﻿@model List<WineStore.Controllers.GioHangUiController.ProductViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Ten danh muc
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tenSp)*@
+            Ten san pham
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.moTa)*@
+            Mo ta
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.giaNhap)*@
+            Gia nhap
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.giaBan)*@
+            Gia ban
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.soLuong)*@
+            So luong
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.image)*@
+            Anh
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.khuVuc)*@
+            Khu vuc
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Vintage)*@
+            vintage
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+           @*@item.tenDanhMuc*@
+        </td>
+        <td>
+             @item.tenSp
+        </td>
+        <td>
+           @item.moTa
+        </td>
+        <td>
+            @item.giaNhap
+        </td>
+        <td>
+             @item.giaBan
+        </td>
+        <td style="color:red;">
+           @item.soLuong
+        </td>
+        <td>
+            @{
+                var imgPath = item.image;
+            }
+            @*@Html.DisplayFor(modelItem => item.image)*@
+            <img src="~/Img/WineImages/@imgPath" width="180" />)
+        </td>
+        <td>
+           @item.khuVuc
+        </td>
+      
+        
+    </tr>
+}
+
+</table>

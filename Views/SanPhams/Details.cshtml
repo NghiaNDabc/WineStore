@@ -1,0 +1,90 @@
+﻿@model WineStore.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SanPham</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DanhMuc.tenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhMuc.tenDanhMuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenSp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenSp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.moTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.moTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giaNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giaNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giaBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giaBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khuVuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khuVuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vintage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vintage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maSp }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

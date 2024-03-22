@@ -1,0 +1,119 @@
+﻿@model IEnumerable<WineStore.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DanhMuc.tenDanhMuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenSp)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.moTa)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.giaNhap)
+            </th*@>
+        <th>
+            @Html.DisplayNameFor(model => model.giaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.khuVuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vintage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhMuc.tenDanhMuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenSp)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.moTa)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.giaNhap)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.giaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soLuong)
+            </td>
+            <td>
+                @{
+                    var imgPath = item.image;
+                }
+                @*@Html.DisplayFor(modelItem => item.image)*@
+                <img src="~/Img/WineImages/@imgPath" width="180" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.khuVuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vintage)
+            </td>
+            @*<td>
+                    <a href="@Url.Action("AddToCart", "GioHangUi", new { id = item.maSp })">Thêm vào giỏ hàng</a>
+                </td>*@
+            <td>
+                So Luong <input type="number" id="quantity_@item.maSp" value="1" min="1" />
+            </td>
+
+            <td>
+                <!-- Sử dụng Ajax để thực hiện thêm sản phẩm vào giỏ hàng -->
+                <button class="addToCartButton" data-product-id="@item.maSp">Thêm vào giỏ hàng</button>
+            </td>
+        </tr>
+
+    }
+
+</table>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+        $(document).ready(function () {
+            // Gắn sự kiện click cho các nút "Thêm vào giỏ hàng"
+            $(".addToCartButton").click(function () {
+                var productId = $(this).data("product-id"); // Lấy productId từ thuộc tính data
+
+                // Lấy số lượng sản phẩm từ input tương ứng
+                var quantity = $("#quantity_" + productId).val();
+
+                // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+                $.ajax({
+                    url: "@Url.Action("AddToCart", "GioHangUi")",
+                    type: "POST",
+                    data: { id: productId, quantity: quantity },
+                    success: function (data) {
+                        // Xử lý kết quả thành công (nếu cần)
+                        alert("Thêm vào giỏ hàng thành công!");
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi (nếu cần)
+                        console.error("Lỗi khi thêm vào giỏ hàng:", error);
+                    }
+                });
+            });
+        });
+</script>

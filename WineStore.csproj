@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,10 +46,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,10 +129,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangUiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SanPhamsController.cs" />
+    <Compile Include="Controllers\UiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChiTietDonHang.cs" />
+    <Compile Include="Models\ChiTietGioHang.cs" />
+    <Compile Include="Models\DanhMuc.cs" />
+    <Compile Include="Models\DonHang.cs" />
+    <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\HinhThucThanhToan.cs" />
+    <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\SanPham.cs" />
+    <Compile Include="Models\WineStoreContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +174,112 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay10.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay11.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay12.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay13.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay14.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay15.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay16.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay17.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay18.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay19.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay20.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay6.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay7.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay8.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chardonnay9.jpg" />
+    <Content Include="App_Data\Img\WineImages\Chenin-Blanc.jpg" />
+    <Content Include="App_Data\Img\WineImages\Gewurztraminer1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Gewurztraminer2.jpg" />
+    <Content Include="App_Data\Img\WineImages\no-image-news.png" />
+    <Content Include="App_Data\Img\WineImages\Pinot-Grigio-and-Pinot-Gris1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Pinot-Grigio-and-Pinot-Gris2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Pinot-Grigio-and-Pinot-Gris3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Pinot-Grigio-and-Pinot-Gris4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling6.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling7.jpg" />
+    <Content Include="App_Data\Img\WineImages\Riesling8.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc10.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc11.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc12.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc13.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc14.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc15.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc16.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc17.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc18.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc19.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc20.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc6.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc7.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc8.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sauvignon-Blanc9.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Chardonnay1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Chardonnay2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Chardonnay3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Chardonnay4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Chardonnay5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc10.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc11.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc12.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc13.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc14.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc15.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc16.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc17.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc18.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc19.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc20.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc6.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc7.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc8.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon-Sauvignon-Blanc9.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Semillon2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sweet-White1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sweet-White2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sweet-White3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sweet-White4.jpg" />
+    <Content Include="App_Data\Img\WineImages\Sweet-White5.jpg" />
+    <Content Include="App_Data\Img\WineImages\Unwooded-Chardonnay1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Unwooded-Chardonnay2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Verdelho1.jpg" />
+    <Content Include="App_Data\Img\WineImages\Verdelho2.jpg" />
+    <Content Include="App_Data\Img\WineImages\Verdelho3.jpg" />
+    <Content Include="App_Data\Img\WineImages\Viognier.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites1.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites10.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites11.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites12.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites2.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites3.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites4.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites5.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites6.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites7.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites8.jpg" />
+    <Content Include="App_Data\Img\WineImages\White-Blend-Other-Whites9.jpg" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -177,11 +305,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SanPhams\Create.cshtml" />
+    <Content Include="Views\SanPhams\Delete.cshtml" />
+    <Content Include="Views\SanPhams\Details.cshtml" />
+    <Content Include="Views\SanPhams\Edit.cshtml" />
+    <Content Include="Views\SanPhams\Index.cshtml" />
+    <Content Include="Views\Ui\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\GioHangUi\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
@@ -242,7 +375,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

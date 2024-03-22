@@ -20,6 +20,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @{
+
+                        {
+                            <li><span style="color:white;">Ho ten cua ban la: @ViewBag.hoTen @Session["user"]</span> </li>
+ }
+                    }
+                    <li>@Html.ActionLink("Dang nhap", "Index", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    <li>@Html.ActionLink("Giỏ hàng", "Index", "GioHangUi", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
