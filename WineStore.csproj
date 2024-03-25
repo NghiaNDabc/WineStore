@@ -329,6 +329,7 @@
     <Content Include="Views\GioHangUi\Index.cshtml" />
     <Content Include="Views\DatHangUi\Index.cshtml" />
     <Content Include="Views\DatHangUi\DatHang.cshtml" />
+    <Content Include="Views\Login\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

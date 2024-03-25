@@ -1,0 +1,101 @@
+﻿@model WineStore.Models.KhachHang
+
+@{
+    ViewBag.Title = "DangKy";
+}
+
+<h2>Logon</h2>
+
+@using (Html.BeginForm("DangKy","Login",FormMethod.Post, new { id = "registerForm" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4></h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        <label>Full name</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.hoTen, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.hoTen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.tenDangNhap, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tenDangNhap, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tenDangNhap, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="form-group">
+        <label>User name</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.maKhacHang, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.maKhacHang, "", new { @class = "text-danger" })
+            <span class="text-danger">@ViewBag.tenDangNhap</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.matKhau, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.matKhau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <div class="col-md-10">
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+        </div>
+        <span class="text-danger confirmPassword">@ViewBag.tenDangNhap</span>
+    </div>
+    <div class="form-group">
+        <label>Phone number</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Address</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="createBtn" value="Logon" class="btn btn-primary btn-hover-border" />
+        </div>
+    </div>
+</div>
+}
+
+@ViewBag.err
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#registerForm").submit(function (event) {
+            var password = $("#matKhau").val();
+            var confirmPassword = $("#confirmPassword").val();
+            if (password != confirmPassword) {
+                $(".confirmPassword").html("Confirm password does not match.");
+                event.preventDefault();
+            }
+        });
+    });
+</script>

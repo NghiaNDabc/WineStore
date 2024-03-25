@@ -12,7 +12,7 @@ namespace WineStore.Controllers
         // GET: DatHangUi
 
         WineStoreContext db = new WineStoreContext();
-        public ActionResult Index(List<int> selectedProducts)
+        public ActionResult Index(List<int> selectedProducts,List<int> soLuong)
         {
             if (selectedProducts == null || !selectedProducts.Any())
             {
@@ -39,6 +39,10 @@ namespace WineStore.Controllers
                             soLuong = chiTiet.soLuong
                         };
             products = query.ToList();
+            for(int i=0;i< products.Count;i++)
+            {
+                products[i].soLuong = soLuong[i];
+            }
             ViewBag.products = products;
             TempData["products"] = products;
             var listThanhToan = db.HinhThucThanhToans.Select(s=>s).ToList();

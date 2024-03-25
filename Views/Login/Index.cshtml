@@ -3,15 +3,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Logion</h2>
-@using (Html.BeginForm("CheckLogin","Login",FormMethod.Post))
-            {
-                <div>
-                    <p>Tai khoan</p>
-                    <p><input name="taikhoan" /></p>
+<h2>Login</h2>
+@using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
+{
+    <div>
+        <p>Username</p>
+        <p><input name="taikhoan" /></p>
 
-                    <p>Mat khau</p>
-                    <p><input name="matkhau" /></p>
-                </div>
-                <input type="submit" />
+        <p>Password</p>
+        <p><input name="matkhau" /></p>
+    </div>
+    <button type="submit"  class="btn btn-primary btn-hover-border">Login</button>
+   <a href="Login/DangKy" class="btn btn-primary btn-hover-border">Logon</a>
 }
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#logon").click(function () {
+            window.location.href = '@Url.Action("DangKy", "Login")';
+            //alert("ok");
+        });
+    });
+</script>

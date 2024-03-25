@@ -47,5 +47,34 @@ namespace WineStore.Controllers
             return RedirectToAction("Index", "Login");
 
         }
+        public ActionResult DangKy()
+        {
+            
+            return View();
+        }
+
+        // POST: Admin/SanPhams/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DangKy([Bind(Include = "maKhacHang,hoTen,tenDangNhap,matKhau,sdt,diaChi,email")] KhachHang kh)
+        {
+            if (db.KhachHangs.Any(s => s.maKhacHang == kh.maKhacHang))
+            {
+                ViewBag.tenDangNhap = "Username is already exists";
+                return View(kh);
+            }
+                if (ModelState.IsValid)
+            {
+                kh.tenDangNhap = kh.maKhacHang;
+                db.KhachHangs.Add(kh);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.err = "Khong them dc";
+            return View(kh);
+        }
     }
 }

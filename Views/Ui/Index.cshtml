@@ -3,9 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    #successMessage {
+        position: fixed;
+        top: 5px;
+        left: 0;
+        width: 20%;
+        z-index: 9999;
+        display: none;
+    }
+</style>
 <h2>Index</h2>
-
+<div id="successMessage" style="display: none;" class="alert alert-success">Thêm vào giỏ hàng thành công!</div>
 <p>
 </p>
 <table class="table">
@@ -107,7 +116,8 @@
                     data: { id: productId, quantity: quantity },
                     success: function (data) {
                         // Xử lý kết quả thành công (nếu cần)
-                        alert("Thêm vào giỏ hàng thành công!");
+                        $("#successMessage").fadeIn().delay(2000).fadeOut();
+                        //alert("Thêm vào giỏ hàng thành công!");
                     },
                     error: function (xhr, status, error) {
                         // Xử lý lỗi (nếu cần)

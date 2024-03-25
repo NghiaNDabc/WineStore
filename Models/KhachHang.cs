@@ -18,17 +18,18 @@ namespace WineStore.Models
 
         [Key]
         [StringLength(10)]
+        
         public string maKhacHang { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Fullname is required")]
         [StringLength(50)]
         public string hoTen { get; set; }
 
-        [Required]
+        
         [StringLength(15)]
         public string tenDangNhap { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [StringLength(20)]
         public string matKhau { get; set; }
 
