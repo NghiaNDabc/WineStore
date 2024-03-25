@@ -15,6 +15,8 @@ namespace WineStore.Areas.Admin.Controllers
         private WineStoreContext db = new WineStoreContext();
 
         // GET: Admin/SanPhams
+
+        [Authorize(Roles= "admin")]
         public ActionResult Index()
         {
             var sanPhams = db.SanPhams.Include(s => s.DanhMuc);

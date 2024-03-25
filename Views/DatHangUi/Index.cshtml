@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>DatHang</h2>
+@{
+    List<WineStore.Controllers.GioHangUiController.ProductViewModel> chitiet = (List<WineStore.Controllers.GioHangUiController.ProductViewModel>)ViewBag.products;
+    List<WineStore.Models.HinhThucThanhToan> thanhToans = ViewBag.listThanhToan;
+
+
+}
+@using (Html.BeginForm("DatHang", "DatHangUi",FormMethod.Post))
+{
+    <div>
+        <h2>Đơn hàng của bạn</h2>
+        <table border="1">
+            @{
+                decimal tongtien = 0;
+            }
+            <tr>
+                <td>Tên</td>
+
+                <td>Tạm tính</td>
+            </tr>
+            @foreach (var i in chitiet)
+            {
+                <tr>
+                    <td>@i.tenSp x @i.soLuong</td>
+                    @{
+
+                        decimal tien = i.soLuong * i.giaBan;
+                        tongtien += tien;
+                    }
+                    <td>@tien</td>
+                </tr>
+                <tr>
+                </tr>
+            }
+            <tr>
+                <th></th>
+                <th>@tongtien</th>
+            </tr>
+
+        </table>
+    </div>
+    <div>
+        <p>Họ tên</p>
+        <p><input name="hoTenNguoiNhan" /></p>
+        <p>Địa chỉ</p>
+        <p><input name="diaChiGiao" /></p>
+        <p>SDT</p>
+        <p><input name="sdtNguoiNhan" /></p>
+        <p>Email</p>
+        <p><input name="emailNguoiNhan" /></p>
+        <br />
+        @foreach (var i in thanhToans)
+        {
+            <label for="@i.maHinhThucThanhToan">@i.tenHinhThucThanhToan</label>
+            <input type="radio" name="maHinhThucThanhToan" value="@i.maHinhThucThanhToan" id="@i.maHinhThucThanhToan" @(i == thanhToans.First() ? "checked" : "")/>
+        }
+    </div>
+    <button type="submit">Dat hang</button>
+}
+

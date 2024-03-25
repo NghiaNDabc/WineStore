@@ -81,3 +81,7 @@ C:\Users\HP\Desktop\Project\WineStore\obj\Debug\WineStore.csproj.CoreCompileInpu
 C:\Users\HP\Desktop\Project\WineStore\obj\Debug\WineStore.csproj.CopyComplete
 C:\Users\HP\Desktop\Project\WineStore\obj\Debug\WineStore.dll
 C:\Users\HP\Desktop\Project\WineStore\obj\Debug\WineStore.pdb
+C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.EntityFramework.xml

@@ -4,14 +4,14 @@
 }
 
 <h2>Logion</h2>
-@using (Html.BeginForm("CheckLogin","Login"))
+@using (Html.BeginForm("CheckLogin","Login",FormMethod.Post))
             {
                 <div>
                     <p>Tai khoan</p>
-                    <p><input name="taikhoan"</p>
+                    <p><input name="taikhoan" /></p>
 
                     <p>Mat khau</p>
-                    <p><input name="matkhau"</p>
+                    <p><input name="matkhau" /></p>
                 </div>
                 <input type="submit" />
 }

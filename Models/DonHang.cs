@@ -23,6 +23,12 @@ namespace WineStore.Models
 
         [StringLength(50)]
         public string diaChiGiao { get; set; }
+        [StringLength(50)]
+        public string hoTenNguoiNhan { get; set; }
+        [StringLength(15)]
+        public string sdtNguoiNhan { get; set; }
+        [StringLength(20)]
+        public string emailNguoiNhan { get; set; }
 
         public DateTime? ngayGiaoHang { get; set; }
 

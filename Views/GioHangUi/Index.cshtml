@@ -4,84 +4,91 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Gio hang</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Ten danh muc
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tenSp)*@
-            Ten san pham
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.moTa)*@
-            Mo ta
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.giaNhap)*@
-            Gia nhap
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.giaBan)*@
-            Gia ban
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.soLuong)*@
-            So luong
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.image)*@
-            Anh
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.khuVuc)*@
-            Khu vuc
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.Vintage)*@
-            vintage
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm("Index", "DatHangUi", FormMethod.Post))
+{
+    <button type="submit" formaction="@Url.Action("Delete", "GioHangUi")">Xóa sản phẩm đã chọn</button>
+    <button type="submit">Đặt hàng</button>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-           @*@item.tenDanhMuc*@
-        </td>
-        <td>
-             @item.tenSp
-        </td>
-        <td>
-           @item.moTa
-        </td>
-        <td>
-            @item.giaNhap
-        </td>
-        <td>
-             @item.giaBan
-        </td>
-        <td style="color:red;">
-           @item.soLuong
-        </td>
-        <td>
-            @{
-                var imgPath = item.image;
-            }
-            @*@Html.DisplayFor(modelItem => item.image)*@
-            <img src="~/Img/WineImages/@imgPath" width="180" />)
-        </td>
-        <td>
-           @item.khuVuc
-        </td>
-      
-        
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                Ten danh muc
+            </th>
+            <th>
+
+                Ten san pham
+            </th>
+            <th>
+
+                Mo ta
+            </th>
+            <th>
+
+                Gia nhap
+            </th>
+            <th>
+
+                Gia ban
+            </th>
+            <th>
+
+                So luong
+            </th>
+            <th>
+
+                Anh
+            </th>
+            <th>
+
+                Khu vuc
+            </th>
+            <th>
+
+                vintage
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="selectedProducts" value="@item.maSp" />
+                </td>
+                <!--<td>-->
+                @*@item.tenDanhMuc*@
+                <!--</td>-->
+                <td>
+                    @item.tenSp
+                </td>
+                <td>
+                    @item.moTa
+                </td>
+                <td>
+                    @item.giaNhap
+                </td>
+                <td>
+                    @item.giaBan
+                </td>
+                <td style="color:red;">
+                    <input name="soLuong" value="@item.soLuong" type="number" />
+                </td>
+                <td>
+                    @{
+                        var imgPath = item.image;
+                    }
+                    @*@Html.DisplayFor(modelItem => item.image)*@
+                    <img src="~/Img/WineImages/@imgPath" width="180" />
+                </td>
+                <td>
+                    @item.khuVuc
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
 }
-
-</table>

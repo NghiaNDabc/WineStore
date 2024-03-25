@@ -20,7 +20,7 @@ namespace WineStore.Models
         public virtual DbSet<HinhThucThanhToan> HinhThucThanhToans { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
-
+        public virtual DbSet<Admin> Admins { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ChiTietDonHang>()
@@ -55,7 +55,15 @@ namespace WineStore.Models
             modelBuilder.Entity<DonHang>()
                 .Property(e => e.maKhacHang)
                 .IsFixedLength();
-
+            modelBuilder.Entity<DonHang>()
+                .Property(e => e.hoTenNguoiNhan)
+                .IsFixedLength();
+            modelBuilder.Entity<DonHang>()
+                .Property(e => e.sdtNguoiNhan)
+                .IsFixedLength();
+            modelBuilder.Entity<DonHang>()
+                .Property(e => e.emailNguoiNhan)
+                .IsFixedLength();
             modelBuilder.Entity<DonHang>()
                 .Property(e => e.maHinhThucThanhToan)
                 .IsFixedLength();
@@ -154,6 +162,12 @@ namespace WineStore.Models
                 .HasMany(e => e.ChiTietGioHangs)
                 .WithRequired(e => e.SanPham)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Admin>()
+                    .Property(e => e.taiKhoan)
+                    .IsFixedLength();
+            modelBuilder.Entity<Admin>()
+                        .Property(e => e.matKhau)
+                        .IsFixedLength();
         }
     }
 }
