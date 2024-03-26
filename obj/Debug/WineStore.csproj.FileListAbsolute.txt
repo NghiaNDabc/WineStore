@@ -85,3 +85,7 @@ C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\HP\Desktop\Project\WineStore\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\HP\Desktop\Project\WineStore\bin\PagedList.dll
+C:\Users\HP\Desktop\Project\WineStore\bin\PagedList.Mvc.dll
+C:\Users\HP\Desktop\Project\WineStore\bin\PagedList.xml
+C:\Users\HP\Desktop\Project\WineStore\bin\PagedList.Mvc.xml

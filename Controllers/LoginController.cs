@@ -47,6 +47,11 @@ namespace WineStore.Controllers
             return RedirectToAction("Index", "Login");
 
         }
+        public ActionResult Logout()
+        {
+            Session.Remove("user");
+            return RedirectToAction("Index");
+        }
         public ActionResult DangKy()
         {
             

@@ -4,91 +4,114 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Gio hang</h2>
-
-@using (Html.BeginForm("Index", "DatHangUi", FormMethod.Post))
+<h2>Cart</h2>
+<h2>@ViewBag.Notification</h2>
+@Styles.Render("~/Content/ButtonPlus.css")
+@if (Model.Count >0)
 {
-    <button type="submit" formaction="@Url.Action("Delete", "GioHangUi")">Xóa sản phẩm đã chọn</button>
-    <button type="submit">Đặt hàng</button>
+    using (Html.BeginForm("Index", "DatHangUi", FormMethod.Post))
+    {
+        <button type="submit" formaction="@Url.Action("Delete", "GioHangUi")" style="font-size:30px;"><i class="fa-solid fa-trash-can"></i></button>
+        <button type="submit">Place Orde</button>
 
-    <table class="table">
-        <tr>
-            <th>
-                Ten danh muc
-            </th>
-            <th>
-
-                Ten san pham
-            </th>
-            <th>
-
-                Mo ta
-            </th>
-            <th>
-
-                Gia nhap
-            </th>
-            <th>
-
-                Gia ban
-            </th>
-            <th>
-
-                So luong
-            </th>
-            <th>
-
-                Anh
-            </th>
-            <th>
-
-                Khu vuc
-            </th>
-            <th>
-
-                vintage
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <table class="table">
             <tr>
-                <td>
-                    <input type="checkbox" name="selectedProducts" value="@item.maSp" />
-                </td>
-                <!--<td>-->
-                @*@item.tenDanhMuc*@
-                <!--</td>-->
-                <td>
-                    @item.tenSp
-                </td>
-                <td>
-                    @item.moTa
-                </td>
-                <td>
-                    @item.giaNhap
-                </td>
-                <td>
-                    @item.giaBan
-                </td>
-                <td style="color:red;">
-                    <input name="soLuong" value="@item.soLuong" type="number" />
-                </td>
-                <td>
-                    @{
-                        var imgPath = item.image;
-                    }
-                    @*@Html.DisplayFor(modelItem => item.image)*@
-                    <img src="~/Img/WineImages/@imgPath" width="180" />
-                </td>
-                <td>
-                    @item.khuVuc
-                </td>
+                <th>
+                    @Model.Count
+                </th>
+                <th>
+
+                    Imgame
+                </th>
+
+
+                <th>
+
+                    Name
+                </th>
+                <th>
+
+                    Price
+                </th>
+                <th>
+
+                    Quantity
+                </th>
 
 
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input style="width:30px; height:30px;" class="form-check-input" type="checkbox" name="selectedProducts" value="@item.maSp" />
+                    </td>
+                    <td>
+                        @{
+                            var imgPath = item.image;
+                        }
+                        @*@Html.DisplayFor(modelItem => item.image)*@
+                        <img src="~/Img/WineImages/@imgPath" width="100" />
+                    </td>
+                    <!--<td>-->
+                    @*@item.tenDanhMuc*@
+                    <!--</td>-->
+                    <td>
+                        @item.tenSp
+                    </td>
+
+
+                    <td>
+                        @item.giaBan
+                    </td>
+                        <td style="color:red;">
+                <div class="d-flex flex-column justify-content-center " style="margin:auto;">
+                    <div class="d-flex prdQuality align-items-center">
+                        <button class="btn-quality-minus" type="button">-</button>
+                        <input class="d-block " style="width: 40px; display: block;  " name="soLuong" type="number" id="quantity_@item.maSp" value="@item.soLuong" min="1" />
+                        <button class="btn-quality-plus " type="button">+</button>
+                    </div>
+        
+                </div>
+</td>
+
+                </tr>
+            }
+
+        </table>
+    }
 }
+else
+            {
+<h2>Your cart is empty.</h2>
+            }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tất cả các phần tử có class 'prdQuality'
+        const prdQualityElements = document.querySelectorAll('.prdQuality');
+
+        // Lặp qua mỗi phần tử
+        prdQualityElements.forEach(function (prdQualityElement) {
+            // Lấy các phần tử con cần thiết
+            const minusButton = prdQualityElement.querySelector('.btn-quality-minus');
+            const plusButton = prdQualityElement.querySelector('.btn-quality-plus');
+            const quantityInput = prdQualityElement.querySelector('input');
+
+            // Sự kiện click cho nút trừ
+            minusButton.addEventListener('click', function () {
+                // Giảm giá trị của input nếu giá trị hiện tại lớn hơn 1
+                if (parseInt(quantityInput.value) > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                }
+            });
+
+            // Sự kiện click cho nút cộng
+            plusButton.addEventListener('click', function () {
+                // Tăng giá trị của input
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            });
+        });
+    });
+</script>

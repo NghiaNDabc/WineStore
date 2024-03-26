@@ -61,9 +61,12 @@ namespace WineStore.Controllers
 
                 List<ProductViewModel> results = (List<ProductViewModel>)query.ToList();
                 Session["GioHang"] = results;
+               // if(results!=null)
                 return View(results);
+                
             }
             List<ChiTietGioHang> ctgioHang=(List < ChiTietGioHang > )Session["GioHang"];
+            if (Session["GioHang"] == null) ctgioHang = new List<ChiTietGioHang>();
             var query2 = from chiTiet in ctgioHang
                          join sanPham in db.SanPhams on chiTiet.maSp equals sanPham.maSp
                         
@@ -81,7 +84,11 @@ namespace WineStore.Controllers
                         };
 
             List<ProductViewModel> results2 = (List<ProductViewModel>)query2.ToList();
-            return View(results2);
+            if (results2 != null)
+                return View(results2);
+            ViewBag.Notification = "Your cart is empty.";
+            return View(new List<ProductViewModel>());
+            
         }
        
         public ActionResult Delete(List<int> selectedProducts)

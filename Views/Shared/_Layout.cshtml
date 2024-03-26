@@ -2,13 +2,32 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/MenuHeader.css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        *,body,.body-content {
+            font-family: "Inter", sans-serif;
+            margin:0; padding:0;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm menu-header">
         <div class="container">
             @Html.ActionLink("WineStore", "Index", "Ui", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -17,28 +36,38 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Ui", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    @{
 
+                   
+                    @if (Session["user"] != null)
+                    {
                         {
-                            <li><span style="color:white;">Ho ten cua ban la: @ViewBag.hoTen @Session["user"]</span> </li>
- }
-                    }
-                    <li>@Html.ActionLink("Dang nhap", "Index", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                            WineStore.Models.KhachHang kh = (WineStore.Models.KhachHang)@Session["user"];
 
-                    <li>@Html.ActionLink("Giỏ hàng", "Index", "GioHangUi", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li><span style="color:white;"><i class="fa-solid fa-user"></i> @kh.hoTen</span> </li>
+                            @Html.ActionLink("Logout", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })
+
+                        }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+}
+
+                    <li><a style="font-size:36px;" href="~/GioHangUi/Index" class="nav-link"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="body-content">
+        
         @RenderBody()
         <hr />
-        <footer>
+        @*<footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")

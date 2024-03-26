@@ -1,0 +1,16 @@
+﻿.menu-header {
+    background-color: #990d23;
+    color:white;
+}
+    .menu-header a {
+        color: white;
+    }
+
+#successMessage {
+    position: fixed;
+    top: 5px;
+    left: 0;
+    width: 20%;
+    z-index: 9999;
+    display: none;
+}

@@ -1,0 +1,66 @@
+﻿
+.prdQuality{
+    margin-left:10px;
+   
+    height:30px;
+    line-height:100%;
+    //border:1px solid black;
+}
+    .prdQuality button, .prdQuality input{
+        display:block;
+        
+    }
+        .prdQuality button:hover {
+            background-color: grey;
+        }
+
+        
+        .prdQuality button {
+          
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            height: 100%;
+            width: 7px;
+            display: flex;
+            
+            align-items: center;
+            width: 20px;
+            background-color: white;
+        }
+.btn-quality-minus {
+    border-left: 1px solid black;
+    border-right: none;
+}
+.btn-quality-plus {
+    border-right: 1px solid black;
+    border-left: none;
+}
+.prdQuality input {
+    outline:red;
+    height: 100%;
+    
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+.addToCartButton {
+    padding:0 0 0 0;
+    height: 40px;
+    background-color: #990d23;
+}
+.price {
+    color:#990d23;
+}
+.product-name {
+    margin-bottom:35px;
+    font-family: "Lora", sans-serif;
+}
+.fa-solid{
+     margin-right:5px;
+}
+.text-price{
+    font-size:25px;
+    font-weight:bold;
+}
