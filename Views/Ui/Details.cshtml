@@ -86,7 +86,7 @@
 <script>
         $(document).ready(function () {
             // Gắn sự kiện click cho các nút "Thêm vào giỏ hàng"
-            $(".addToCartButton").click(function () {
+            $(".addToCartButtonxx").click(function () {
                 var productId = $(this).data("product-id"); // Lấy productId từ thuộc tính data
 
                 // Lấy số lượng sản phẩm từ input tương ứng
@@ -109,6 +109,24 @@
                 });
             });
         });
+    $(document).ready(function () {
+        $(".addToCartButton").click(function () {
+            var id = $(this).data("product-id");
+            var soluong = $("#quantity_" + id).val();
+            $.ajax({
+                url: "@Url.Action("AddToCart","GioHangUi")",
+                type: "POST",
+                data: { id: id, quantity: soluong },
+                success: function () {
+                    $("#successMessage").fadeIn().delay(2000).fadeOut();
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi (nếu cần)
+                    alert(message); ("Lỗi khi thêm vào giỏ hàng:", error);
+                }
+            })
+        });
+    });
 </script>
 
 <script>

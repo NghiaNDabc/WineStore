@@ -6,35 +6,88 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+    <style>
+        /* Thiết lập chiều rộng cố định cho menu dọc */
+        .vertical-menu {
+            width: 250px; /* Độ rộng của menu */
+            height: 1000px;
+            background-color: #E0E5F2; /* Màu nền */
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            /* Thiết lập màu nền và khoảng cách giữa các mục menu */
+            .vertical-menu a {
+                margin: 20px 0;
+                font-weight: bold;
+                padding: 15px 20px; /* Khoảng cách giữa các mục */
+                display: block; /* Hiển thị mỗi mục trên một dòng */
+                color: #212529; /* Màu chữ */
+                text-decoration: none; /* Gỡ bỏ đường gạch chân */
+                border-radius: 30px;
+                transition: background-color 0.3s, color 0.3s;
+                border: 1px solid transparent;
+            }
+
+                /* Tạo hiệu ứng hover khi di chuột vào các mục */
+                .vertical-menu a:hover {
+                    background-color: #00ACE8;
+                    color: #fff;
+                    border: 1px solid #00ACE8;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #0056b3;
+                    color: #fff;
+                    border: 1px solid #0056b3;
+                }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .logo img {
+                height: 50px;
+                vertical-align: middle;
+            }
+
+            .logo span {
+                font-weight: bold;
+                font-size: 16px;
+                vertical-align: middle;
+                color: #0056b3;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="vertical-menu">
+            <div class="logo">
+                <img src="~/Content/Images/logo-haui.png" width="50" style="margin-right: 10px;" />
+                <span>WineStore</span>
+            </div>
+            <a href="#">Trang chủ</a>
+            
+            @Html.ActionLink("Bảo trì rượu", "Index", "SanPhams")
+        </div>
+        <div>
+            @RenderBody();
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('.vertical-menu a').on('click', function () {
+                $('.vertical-menu a').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
 </body>
 </html>

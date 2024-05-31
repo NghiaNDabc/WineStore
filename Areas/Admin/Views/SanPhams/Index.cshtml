@@ -1,81 +1,244 @@
-﻿@model IEnumerable<WineStore.Models.SanPham>
-
+﻿@model PagedList.IPagedList<WineStore.Models.SanPham>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
 }
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DanhMuc.tenDanhMuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tenSp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.moTa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.giaNhap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.giaBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.soLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.khuVuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vintage)
-        </th>
-        <th></th>
-    </tr>
+<style>
+    .btnxx {
+        background-color: #00ACE8 !important;
+        color: white;
+        font-weight: bold;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DanhMuc.tenDanhMuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tenSp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.moTa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.giaNhap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.giaBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.soLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.khuVuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vintage)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.maSp }) |
-            @Html.ActionLink("Details", "Details", new { id=item.maSp }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.maSp })
-        </td>
-    </tr>
+    a {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-them {
+        /*border: 1px solid black;*/
+        height: 50px;
+        width: 180px;
+        text-align: center;
+        display: flex; /* Sử dụng flexbox để căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center;
+    }
+
+        .btn-them a {
+            display: block;
+            line-height: 100%;
+        }
+
+    .btn-xoa {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 48px;
+        background-color: red;
+        /* position: absolute;
+        z-index: 100;*/
+    }
+
+    .bao {
+        height: 50px;
+    }
+
+    .them-xoa {
+        position: fixed;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        width: 85%;
+        /*width: 100%;*/
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: top 0.3s;
+    }
+</style>
+
+<div class="modal" id="confirmDelete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="confirmDelete(false)" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa các danh mục đã chọn không?</p>
+                <ul id="selectedBooksList"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="confirmDelete(true)">Có</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="confirmDelete(false)">Không</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@using (Html.BeginForm("DeleteList", "SanPhams", FormMethod.Post, new { @id = "deleteForm" }))
+{
+    <div class="bao">
+        <div class="them-xoa" id="them-xoa">
+            <div class="btn-them">
+                @Html.ActionLink("Thêm danh mục mới", "Create", null, new { @class = "btn btn-light btnxx" })
+            </div>
+            <div>
+                <div class="btn btn-danger btn-xoa" type="submit" style="font-size:30px;" onclick="showConfirmDelete()">Xóa</div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th><h2>@ViewBag.sl</h2></th>
+                <th>
+                    Categories
+                </th>
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Giá nhập
+                </th>
+                <th>
+                <th>
+                    Giá bán
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Hình ảnh
+                </th>
+
+                <th>
+                    Vintage
+                </th>
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input style="width:30px; height:30px;" class="form-check-input" type="checkbox" name="selectedProducts" value="@item.maSp" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DanhMuc.tenDanhMuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenSp)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.giaNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.giaBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soLuong)
+                </td>
+                <td>
+                    <img src="~/Img/WineImages/@item.image" width="100" />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vintage)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.maSp }) 
+                   
+                </td>
+            </tr>
+        }
+    </table>
 }
 
-</table>
+        Trang @(Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        <script>
+            function showConfirmDelete() {
+                var confirmDelete = confirm("Bạn có chắc chắn muốn xóa các sách đã chọn không?");
+                if (confirmDelete) {
+                    document.getElementById("deleteForm").submit();
+                }
+            }
+        </script>
+        <div class="modal" id="confirmDelete" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận xóa</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="confirmDelete(false)" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xóa các sách đã chọn không?</p>
+                        <ul id="selectedBooksList"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete(true)">Có</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="confirmDelete(false)">Không</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function updateSelectedBooksList() {
+                var selectedBooksList = document.getElementById("selectedBooksList");
+                selectedBooksList.innerHTML = ""; // Xóa danh sách cũ
+
+                var selectedBooks = document.querySelectorAll('input[name="selectedProducts"]:checked');
+                selectedBooks.forEach(function (book) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = book.parentNode.nextElementSibling.nextElementSibling.textContent; // Lấy tên sách từ cột thứ 3
+
+                    selectedBooksList.appendChild(listItem);
+                });
+            }
+            function confirmDelete(isConfirmed) {
+                if (isConfirmed) {
+                   
+                    document.getElementById("deleteForm").submit();
+                } else {
+                  
+                    document.getElementById("confirmDelete").style.display = "none";
+                }
+            }
+
+            function showConfirmDelete() {
+            
+            
+                updateSelectedBooksList();
+                document.getElementById("confirmDelete").style.display = "block";
+            }
+        </script>
+        <script>
+            setTimeout(function () {
+                var successMessage = document.querySelector('.alert-success');
+                if (successMessage) {
+                   
+                    successMessage.style.display = 'block';
+
+                    
+                    setTimeout(function () {
+                        successMessage.style.display = 'none';
+                    }, 300000);
+                }
+            }, 3000);
+        </script>

@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -67,7 +67,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                <input name="image" type="hidden" value="@Model.image" />
+                <img id="output" src="~/Img/WineImages/@Model.image" alt="Ảnh" width="180" />
+                <input name="imgfile" id="ufile" type="file" onchange="loadF(event)" />
                 @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -99,3 +101,10 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+    var loadF = function (event) {
+        var img = document.getElementById('output');
+        img.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>

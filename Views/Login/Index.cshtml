@@ -2,20 +2,39 @@
 @{
     ViewBag.Title = "Index";
 }
+@Styles.Render("~/Content/Login.css")
+<div class="login">
+    <h2 class="header-login">Login</h2>
+    <div class="login-text">Here is where customers can access and <br /> manage personal information, purchase history, and special offers.</div>
+    @using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
+    {
+        <div style="width:100%;">
+            <label for="taikhoan">Username</label>
+            <p><input name="taikhoan" id="taikhoan" placeholder="Your email" /></p>
 
-<h2>Login</h2>
-@using (Html.BeginForm("CheckLogin", "Login", FormMethod.Post))
-{
-    <div>
-        <p>Username</p>
-        <p><input name="taikhoan" /></p>
+            <label for="matkhau">Password</label>
+            <p><input name="matkhau" id="matkhau" placeholder="Your password" type="password" /></p>
+           
+            <p style="font-size:16px; margin-top:-6px;">
+                Forgot password?
+            </p>
+        </div>
+        
+        <div class="container body-content d-flex flex-column align-items-center" style="width:100%;">
+            <button type="submit" class="btn-login btn btn-primary btn-hover-border">Login</button>
+            <p style="font-size:18px;">
+                You don't have acccount?
+            </p>
+            <a href="Login/DangKy" class="link-logon btnbtn-primarybtn-hover-border">Logon</a>
+        </div>
+        
 
-        <p>Password</p>
-        <p><input name="matkhau" /></p>
-    </div>
-    <button type="submit"  class="btn btn-primary btn-hover-border">Login</button>
-   <a href="Login/DangKy" class="btn btn-primary btn-hover-border">Logon</a>
-}
+
+        <div>
+            
+        </div>
+    }
+</div>
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>
     $(document).ready(function () {

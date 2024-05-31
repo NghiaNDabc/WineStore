@@ -29,7 +29,7 @@ namespace WineStore.Controllers
                         select new ProductViewModel
                         {
                             maSp = sanPham.maSp,
-                            tenDanhMuc = sanPham.DanhMuc.tenDanhMuc, // Sử dụng mối quan hệ để truy cập thuộc tính của DanhMuc
+                            tenDanhMuc = sanPham.DanhMuc.tenDanhMuc,
                             tenSp = sanPham.tenSp,
                             moTa = sanPham.moTa,
                             giaNhap = sanPham.giaNhap,

@@ -5,25 +5,29 @@
 }
 
 <h2>Create</h2>
-
-@using (Html.BeginForm()) 
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-success">
+        <i class="fas fa-arrow-left mr-2"></i> Trở về
+    </a>
+</div>
+@using (Html.BeginForm("Create", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>SanPham</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.maSp, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.maSp, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.maSp, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.maDanhMuc, "maDanhMuc", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Danh mục </label>
             <div class="col-md-10">
                 @Html.DropDownList("maDanhMuc", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.maDanhMuc, "", new { @class = "text-danger" })
@@ -31,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tenSp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2">Tên sản phẩm</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tenSp, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tenSp, "", new { @class = "text-danger" })
@@ -39,23 +43,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.moTa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.moTa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.moTa, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <label class="control-label col-md-2">Mô tả</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.moTa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.moTa, "", new { @class = "text-danger" })
+                </div>
+</div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.giaNhap, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.giaNhap, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.giaNhap, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <label class="control-label col-md-2">Giá nhập </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.giaNhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.giaNhap, "", new { @class = "text-danger" })
+                </div>
+</div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.giaBan, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Giá bán </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.giaBan, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.giaBan, "", new { @class = "text-danger" })
@@ -63,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.soLuong, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Số lượng </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.soLuong, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.soLuong, "", new { @class = "text-danger" })
@@ -71,9 +75,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Hình ảnh</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                <img id="output" src="~/Img/WineImages/no-image-news.png" alt="Ảnh" width="180" />
+                <input name="imgfile" id="ufile" type="file" onchange="loadF(event)" />
                 @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -87,7 +92,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vintage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Khu vực </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Vintage, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Vintage, "", new { @class = "text-danger" })
@@ -96,12 +101,67 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="addButton"  value="Thêm mới" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+<div id="successPopup" class="alert alert-success" style="display: none;">
+    <span id="successMessage"></span>
 </div>
+<div id="errorPopup" class="alert alert-success" style="display: none;">
+    Lỗi: <span id="errorMessage"></span>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    var loadF = function (event) {
+        var img = document.getElementById('output');
+        img.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+    $(document).ready(function () {
+        $('#addButton').click(function (e) {
+        //e.preventDefault();
+             alert('nghiadz');
+           var isValid = true;
+             var formData = new FormData($('#myform')[0]);
+        if (isValid == true) {
+            $.ajax({
+                url: '@Url.Action("Create", "SanPhams")',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert('ok');
+                    if (response.success) {
+                        // Show success message in popup or div
+                        $('#successMessage').text(response.message);
+                        $('#successPopup').fadeIn();
+                        setTimeout(function () {
+                            $('#successPopup').fadeOut();
+                        }, 2000);
+                        // $('#successPopup').show(); // Show popup or div
+                    } else {
+                        // Show error message in popup or div
+                        $('#errorMessage').text(response.message);
+                        $('#errorPopup').fadeIn().delay(2000).fadeOut();
+                        // Show popup or div
+                    }
+                },
+                error: function () {
+                    alert("cc");
+                    // Handle AJAX error
+                    $('#errorMessage').text("Có lỗi xảy ra khi thêm sách. Vui lòng thử lại sau.");
+                    $('#errorPopup').fadeIn().delay(2000).fadeOut(); // Show popup or div
+                }
+            });
+        } else {
+            e.preventDefault();
+        };
+        return false; // Ngăn chặn hành động mặc định của nút
+    });
+    });
+</script>

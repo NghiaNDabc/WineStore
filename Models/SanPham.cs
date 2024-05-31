@@ -1,7 +1,8 @@
-namespace WineStore.Models
+﻿namespace WineStore.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -18,29 +19,35 @@ namespace WineStore.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DisplayName("Mã sản phẩm")]
         public int maSp { get; set; }
 
         [Required]
         [StringLength(10)]
         public string maDanhMuc { get; set; }
 
-        [Required]
+       
         [StringLength(50)]
+        [DisplayName("Tên sản phẩm")]
         public string tenSp { get; set; }
 
         [Column(TypeName = "text")]
+        [DisplayName("Mô tả")]
         public string moTa { get; set; }
 
         [Column(TypeName = "numeric")]
+        [DisplayName("Giá nhập")]
         public decimal giaNhap { get; set; }
 
         [Column(TypeName = "numeric")]
+        [DisplayName("Giá bán")]
         public decimal giaBan { get; set; }
+        [DisplayName("Số lượng")]
 
         public int soLuong { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
+
         public string image { get; set; }
 
         [StringLength(100)]

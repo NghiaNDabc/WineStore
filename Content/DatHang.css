@@ -1,0 +1,27 @@
+﻿.dathang {
+    display: flex !important;
+}
+.infor-placeorder{
+    width:50%;
+}
+.infor {
+    padding-left:20px;
+    border: 1px solid #b4975a;
+    width: 620px;
+    max-width: 620px;
+    height:60px;
+}
+
+.dathang-btn{
+    width:300px;
+    height:60px;
+    background-color:#B49753;
+    font-size:40px;
+    color:white;
+}
+.border {
+    border: 1px solid #990d23 !important;
+}
+th, td{
+    padding:0px 20px;
+}
